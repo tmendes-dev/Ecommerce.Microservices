@@ -1,3 +1,4 @@
+using Catalog.API.Data.Context;
 using Catalog.API.Data.Repository;
 using Catalog.API.Interfaces.Data.Context;
 using Catalog.API.Interfaces.Data.Repository;
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<ICatalogContext, ICatalogContext>();
+builder.Services.AddTransient<ICatalogContext, CatalogContext>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 var app = builder.Build();

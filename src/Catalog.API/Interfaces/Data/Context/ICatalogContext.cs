@@ -6,5 +6,4 @@ namespace Catalog.API.Interfaces.Data.Context;
 public interface ICatalogContext
 {
     IMongoCollection<Product> Products { get; }
-    
 }

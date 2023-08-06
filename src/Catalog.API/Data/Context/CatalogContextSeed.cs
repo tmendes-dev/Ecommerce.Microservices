@@ -7,16 +7,13 @@ public class CatalogContextSeed
 {
     public static void SeedData(IMongoCollection<Product> productCollection)
     {
-        bool existProduct = productCollection.Find(p => true).Any();
-        if (!existProduct)
-        {
-            productCollection.InsertManyAsync(GetPreconfiguredProducts());
-        }
+        var existProduct = productCollection.Find(p => true).Any();
+        if (!existProduct) productCollection.InsertManyAsync(GetPreconfiguredProducts());
     }
 
     private static IEnumerable<Product> GetPreconfiguredProducts()
     {
-        return new List<Product>()
+        return new List<Product>
         {
             new()
             {
