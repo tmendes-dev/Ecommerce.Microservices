@@ -1,0 +1,35 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  catalog.api:
+    build:
+      context: "C:\\Users\\tmendes-dev\\source\\repos\\Ecommerce.Microservices\\src"
+      dockerfile: "Catalog.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "/riderDebugger/linux-x64/dotnet/dotnet"
+    - "/riderDebugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\tmendes-dev\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\tmendes-dev\\.nuget\\packages"
+      RIDER_DEBUGGER_LOG_DIR: "/riderLogs"
+      RESHARPER_LOG_CONF: "/riderLogsConf/backend-log.xml"
+    image: "catalog.api:dev"
+    ports:
+    - "127.0.0.1:57000:57100"
+    - "127.0.0.1:57200:57300"
+    volumes:
+    - "C:\\Users\\tmendes-dev\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "C:\\Users\\tmendes-dev\\source\\repos\\Ecommerce.Microservices\\src\\Catalog.API:/app:rw"
+    - "C:\\Users\\tmendes-dev\\source\\repos\\Ecommerce.Microservices\\src:/src:rw"
+    - "C:\\Users\\tmendes-dev\\AppData\\Local\\JetBrains\\RiderRemoteDebugger\\2023.2\\\
+      Linux64:/riderDebugger"
+    - "C:\\Program Files\\JetBrains\\JetBrains Rider 2023.2/bin:/riderLogsConf"
+    - "C:\\Users\\tmendes-dev\\AppData\\Local\\JetBrains\\Rider2023.2\\log\\DebuggerWorker\\\
+      JetBrains.Debugger.Worker.2023_8_06_12_40_58:/riderLogs:rw"
+    working_dir: "/app"

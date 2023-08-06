@@ -40,7 +40,29 @@ public class CatalogController : ControllerBase
             return StatusCode(500);
         }
     }
-
+    [HttpGet("{id:length(24)}", Name = "GetProduct")]
+    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    public async Task<ActionResult<Product>> GetProductById(string id)
+    {
+        try
+        {
+            Product? product = await _repository.GetById(id);
+            
+            if (product == null)
+            {
+                _logger.LogError($"Product with id: {id}, not found.");
+                return NotFound();
+            }
+            return Ok(product);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, $"An error ocurred in method {MethodBase.GetCurrentMethod()!.Name}");
+            return StatusCode(500);
+        }
+    }
     [HttpGet("[action]/{category}", Name = "GetProductByCategory")]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
